@@ -1,7 +1,6 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-
+import 'package:login/models/football_detels.dart';
 import '../models/country_data_model.dart';
 
 class Country extends StatelessWidget {
@@ -10,47 +9,47 @@ class Country extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    {
-      return Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
+    List<CountryDataModel> countries = [
+      countrydata,
+      // يمكن إضافة المزيد من العناصر هنا
+    ];
+
+    return SingleChildScrollView(
+      child: Column(
         children: [
-
-          Container(
-            margin: EdgeInsets.only(top: 20, left: 20, right: 10),
-            width: MediaQuery.of(context).size.width*0.80,
-            height: 250,
-            decoration: BoxDecoration(
-              // color: Colors.grey,
-              image: DecorationImage(
-                  image: countrydata.Image != null
-                      ? NetworkImage(countrydata.Image!)
-                      : NetworkImage(
-                          "https://www.creativefabrica.com/wp-content/uploads/2019/03/Monogram-NO-Logo-Design-by-Greenlines-Studios-580x386.jpg"),
-                  fit: BoxFit.cover),
-              borderRadius: BorderRadius.circular(25),
-            ),
-
-          ),
-
-          Container(
-
-            margin: EdgeInsets.only(top: 10,left: 50,right: 50),
-            alignment: Alignment.center,
-            height: 50,
-            decoration: BoxDecoration(
-              border: Border.all(),
-              color: Color(0xffE91C63),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Text(
-              countrydata.CountryName,
-              style: TextStyle(color: Colors.white, fontFamily: 'Poppins',fontSize: 20),
-            ),
-          ),
-
+          
+          foot_return(countries),
         ],
-      );
-    }
-    ;
+      )
+    );
   }
 }
+
+  Column foot_return(List<CountryDataModel> countries) {
+    return Column(
+    children: [
+      for (int i = 0; i < countries.length; i += 2)
+        Row(
+          children: [
+            Expanded(
+              child: CountryContainer(
+                countryName: countries[i].CountryName,
+                imageUrl: countries[i].Image != null
+                    ? countries[i].Image!
+                    : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Flag_of_the_United_States_%28DoS_ECA_Color_Standard%29.svg/1920px-Flag_of_the_United_States_%28DoS_ECA_Color_Standard%29.svg.png',
+              ),
+            ),
+            if (i + 1 < countries.length)
+              Expanded(
+                child: CountryContainer(
+                  countryName: countries[i + 1].CountryName,
+                  imageUrl: countries[i + 1].Image != null
+                      ? countries[i + 1].Image!
+                      : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Flag_of_the_United_States_%28DoS_ECA_Color_Standard%29.svg/1920px-Flag_of_the_United_States_%28DoS_ECA_Color_Standard%29.svg.png',
+                ),
+              ),
+          ],
+        ),
+    ],
+  );
+  }

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_element, prefer_final_fields
+// ignore_for_file: prefer_const_constructors, unused_element, prefer_final_fields, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, sized_box_for_whitespace, avoid_unnecessary_containers
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
